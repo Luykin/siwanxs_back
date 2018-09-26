@@ -7,7 +7,7 @@ export default new Router({
     routes: [
         {
             path: '/',
-            redirect: '/dashboard'
+            redirect: '/index'
         },
         {
             path: '/',
@@ -15,8 +15,8 @@ export default new Router({
             meta: { title: '自述文件' },
             children:[
                 {
-                    path: '/dashboard',
-                    component: resolve => require(['../components/page/Dashboard.vue'], resolve),
+                    path: '/index',
+                    component: resolve => require(['../components/page/index.vue'], resolve),
                     meta: { title: '系统首页' }
                 },
                 {
@@ -84,6 +84,26 @@ export default new Router({
                     path: '/403',
                     component: resolve => require(['../components/page/403.vue'], resolve),
                     meta: { title: '403' }
+                },
+                {
+                    path: '/order-list',
+                    component: resolve => require(['../components/page/orderList.vue'], resolve),
+                    meta: { title: '订单列表' }
+                },
+                {
+                    path: '/admin-keys',
+                    component: resolve => require(['../components/page/adminkey.vue'], resolve),
+                    meta: { title: '客服管理', permission: true }
+                },
+                {
+                    path: '/in-out',
+                    component: resolve => require(['../components/page/inout.vue'], resolve),
+                    meta: { title: '导入导出', permission: true }
+                },
+                {
+                    path: '/updata-password',
+                    component: resolve => require(['../components/page/updatapassword.vue'], resolve),
+                    meta: { title: '修改密码' }
                 }
             ]
         },
