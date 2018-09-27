@@ -74,6 +74,26 @@ export function excel(maxnum, mysqldump) {
       mysqldump
     })
   }
+  return axios.post(url, qs.stringify(Object.assign(data, {'_sg': getSign(data)})), {
+    responseType: 'blob'
+  })
+  .then((res) => {
+    return Promise.resolve(res)
+  })
+  .catch((error) => {
+    return Promise.resolve({
+      err_code: error.response.status,
+      err_msg: error.response.status
+    })
+  })
+}
+// 获取客服列表
+export function adminlist(limit, offset) {
+  const url = `${PREFIX_URL}/back/adminlist`
+  let data = {
+    limit,
+    offset
+  }
   return axios.post(url, qs.stringify(Object.assign(data, {'_sg': getSign(data)})))
   .then((res) => {
     return Promise.resolve(res)
@@ -85,12 +105,19 @@ export function excel(maxnum, mysqldump) {
     })
   })
 }
-// 获取列表
-export function adminlist(limit, offset) {
-  const url = `${PREFIX_URL}/back/adminlist`
+
+// 获取所有订单
+export function orderlist(limit, offset, query_methed, query) {
+  const url = `${PREFIX_URL}/back/orderlist`
   let data = {
     limit,
-    offset
+    offset,
+    query_methed
+  }
+  if (query) {
+    Object.assign(data, {
+      query
+    })
   }
   return axios.post(url, qs.stringify(Object.assign(data, {'_sg': getSign(data)})))
   .then((res) => {

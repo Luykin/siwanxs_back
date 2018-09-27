@@ -82,7 +82,7 @@
     position: relative;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to top, #ebbba7 0%, #cfc7f8 100%);
+    background: linear-gradient(to top, rgb(51, 62, 78) 0%, rgb(44, 104, 193) 100%);
     /*background-image: url(../../assets/login-bg.jpg);*/
     background-size: 100%;
 }

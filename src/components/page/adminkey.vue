@@ -40,7 +40,7 @@
     </div>
 </template>
 <script>
-import { adminaccount, excel, adminlist } from '../../api/index'
+import { adminaccount, adminlist } from '../../api/index'
 export default {
     data() {
         return {
@@ -81,6 +81,8 @@ export default {
                         message: '创建成功',
                         type: 'success'
                     });
+                    this.name = ''
+                    this.password = ''
                 } else {
                     this.$message({
                         showClose: true,
