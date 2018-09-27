@@ -59,11 +59,6 @@
                     icon: 'el-icon-lx-file',
                     index: 'in-out',
                     title: '导入导出'
-                },
-                {
-                    icon: 'el-icon-lx-settings',
-                    index: 'updata-password',
-                    title: '修改密码'
                 }
                 ]
             }
