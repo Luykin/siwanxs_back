@@ -33,7 +33,7 @@
                 </el-table-column>
                 <el-table-column label="支付状态" width="100">
                     <template slot-scope="scope">
-                        {{scope.row.status == 1 ? '未支付' : '已支付'}}
+                        {{scope.row.status == 1 ? '已支付' : '未支付'}}
                     </template>
                 </el-table-column>
 
