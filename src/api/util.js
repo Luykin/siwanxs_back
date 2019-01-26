@@ -21,17 +21,19 @@ const getKey = () => {
   const key = CryptoJS.MD5(signStr).toString().toUpperCase()
   return key
 }
-export const getSign=(data) =>{
-  let sortedKeys = Object.keys(data).sort()
-  let signStr = ''
-  for (let item in sortedKeys) {
-    const key = sortedKeys[item]
-    signStr += key + '=' + data[key]  + '&'
-  }
-  signStr += 'key=' + PRIVATE_KEY
-  // console.log(signStr)
-  const sign = CryptoJS.MD5(signStr).toString().toUpperCase()
-  return sign
+export function getSign(data) {
+    let sortedKeys = Object.keys(data).sort()
+    let signStr = ''
+    for (let item in sortedKeys) {
+        const key = sortedKeys[item]
+        signStr += key + '=' + data[key]
+    }
+    signStr += 'key=' + PRIVATE_KEY
+    return CryptoJS.MD5(signStr).toString()
+}
+
+export function getTime() {
+    return parseInt(Date.parse(new Date()) / 1000)
 }
 
 const verifyPhone=(phone)=> {

@@ -3,7 +3,9 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var PREFIX_URL = exports.PREFIX_URL = 'http://132.232.4.248:3000';
+var env = exports.env = 'dev';
+var PREFIX_URL = exports.PREFIX_URL = 'https://' + env + '.btc.melonblock.com/fabulous';
+var UAID = exports.UAID = 360400;
 // var PREFIX_URL = exports.PREFIX_URL = 'http://luoyukun.com:3000';
-var QINIU_PREFIX =  exports.QINIU_PREFIX = 'ybys-qiyu'; //七牛云储存前缀，防误删
+var QINIU_PREFIX = exports.QINIU_PREFIX = '-dgz_back' + env;// 七牛云储存前缀，防误删
 

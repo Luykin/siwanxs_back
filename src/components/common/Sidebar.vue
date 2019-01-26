@@ -45,7 +45,7 @@
                     title: '余额充值'
                 },{
                     icon: 'el-icon-lx-rank',
-                    index: 'order',
+                    index: 'consume',
                     title: '消耗记录'
                 }]
                 // recharge

@@ -1,12 +1,12 @@
 <template>
     <div>
-        123456
+        consume
     </div>
 </template>
 
 <script>
     export default {
-        name: "goods"
+        name: "consume"
     }
 </script>
 

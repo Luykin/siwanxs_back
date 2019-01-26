@@ -1,39 +1,39 @@
-'use strict'
+'use strict';
 
-const path = require('path')
-const utils = require('./utils')
-const webpack = require('webpack')
-const config = require('../config')
-const merge = require('webpack-merge')
-const baseWebpackConfig = require('./webpack.base.conf')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-const QiniuPlugin = require('./upload-qiniu-webpack-plugin')
-const DeleteqiniuPlugin = require('./delete-qiniu-webpack-plugin')
+const path = require('path');
+const utils = require('./utils');
+const webpack = require('webpack');
+const config = require('../config');
+const merge = require('webpack-merge');
+const baseWebpackConfig = require('./webpack.base.conf');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const QiniuPlugin = require('./upload-qiniu-webpack-plugin');
+const DeleteqiniuPlugin = require('./delete-qiniu-webpack-plugin');
 // const JsEncodePlugin = require('./JsEncodePlugin')
 
 // console.log(JSON.stringify(DeleteqiniuPlugin))
-const env = require('../config/prod.env')
+const env = require('../config/prod.env');
 const _config = require('../src/api/config');
-const uaid_qiniu_prefix = _config.QINIU_PREFIX
+const uaid_qiniu_prefix = _config.QINIU_PREFIX;
 
-const Version = new Date().getTime()
+const Version = new Date().getTime();
 const qiniuPlugin = new QiniuPlugin({
-  ACCESS_KEY: "xqzyF2sLe3IapiqFXHk1HLZyLlcSqV8ov3tgCKzR",
-  SECRET_KEY: "SP6IrYQYJt3T5FoX-a2Fje1v3yKBhEGDQoW3eh-J",
-  bucket: "mini-app",
-  path: '[hash]',
-  prefix: uaid_qiniu_prefix
-})
+    ACCESS_KEY: "pnT5pT10yrAsQuUbl1QlIxw3OBSbGsxQA7dhama4",
+    SECRET_KEY: "nwXCPezSMnt5f2plL1qz-BukvX2RYQLjavpLv0Xl",
+    bucket: "wangzhantu",
+    path: '[hash]',
+    prefix: uaid_qiniu_prefix
+});
 const deleteqiniuPlugin = new DeleteqiniuPlugin({
-  ACCESS_KEY: "xqzyF2sLe3IapiqFXHk1HLZyLlcSqV8ov3tgCKzR",
-  SECRET_KEY: "SP6IrYQYJt3T5FoX-a2Fje1v3yKBhEGDQoW3eh-J",
-  bucket: "mini-app",
-  prefix: uaid_qiniu_prefix
-})
+    ACCESS_KEY: "pnT5pT10yrAsQuUbl1QlIxw3OBSbGsxQA7dhama4",
+    SECRET_KEY: "nwXCPezSMnt5f2plL1qz-BukvX2RYQLjavpLv0Xl",
+    bucket: "wangzhantu",
+    prefix: uaid_qiniu_prefix
+});
 
 const webpackConfig = merge(baseWebpackConfig, {
   module: {
@@ -48,7 +48,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     path: config.build.assetsRoot,
     filename: utils.assetsPath('js/[name].[hash]' + Version + '.js'),
     chunkFilename: utils.assetsPath('js/[id].[hash]' + Version + '.js'),
-    publicPath: "http://pfnzvmvon.bkt.clouddn.com/" + uaid_qiniu_prefix + "[hash]/"
+      publicPath: "https://cdn.xingkwh.com/" + uaid_qiniu_prefix + "[hash]/"
   },
   plugins: [
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
@@ -78,7 +78,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       filename: utils.assetsPath('css/[name].[contenthash]' + Version + '.css'),
       // Setting the following option to `false` will not extract CSS from codesplit chunks.
       // Their CSS will instead be inserted dynamically with style-loader when the codesplit chunk has been loaded by webpack.
-      // It's currently set to `true` because we are seeing that sourcemaps are included in the codesplit bundle as well when it's `false`, 
+      // It's currently set to `true` because we are seeing that sourcemaps are included in the codesplit bundle as well when it's `false`,
       // increasing file size: https://github.com/vuejs-templates/webpack/issues/1110
       allChunks: true,
     }),
@@ -145,10 +145,10 @@ const webpackConfig = merge(baseWebpackConfig, {
       ignore: ['.*']
     }])
   ]
-})
+});
 
 if (config.build.productionGzip) {
-  const CompressionWebpackPlugin = require('compression-webpack-plugin')
+  const CompressionWebpackPlugin = require('compression-webpack-plugin');
 
   webpackConfig.plugins.push(
     new CompressionWebpackPlugin({

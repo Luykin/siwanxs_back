@@ -4,12 +4,15 @@
             <el-col :span="8">
                 <el-card shadow="hover" class="mgb20" style="height:252px;">
                     <div class="user-info">
-                        <img :src="userInfo.icon" class="user-avator" alt="">
+                        <img :src="$root.userInfo.avatar" class="user-avator" alt="">
+                        <!--{"username":"3814754521","nickname":"17323869299","avatar":"https://cdn.xingkwh.com/DGZavatar.png","score":"0.00","phone":"17323869299"}-->
                         <div class="user-info-cont">
-                            <div class="user-info-name">{{name}}</div>
-                            <div>{{role}}</div>
+                            <div class="user-info-name">{{$root.userInfo.nickname}}</div>
+                            <div>管理员</div>
                         </div>
                     </div>
+                    <div class="user-info-list">抖个赞后台人员ID: {{$root.userInfo.username}}</div>
+                    <div class="user-info-list">余额:{{$root.userInfo.score}}</div>
                 </el-card>
             </el-col>
         </el-row>
@@ -24,9 +27,12 @@
         name: 'dashboard',
         data() {
             return {
-                name: localStorage.getItem('ms_username'),
-                userInfo: JSON.parse(localStorage.getItem('ms_userinfo'))
+                // name: localStorage.getItem('ms_username'),
+                // userInfo: JSON.parse(localStorage.getItem('ms_userinfo'))
             }
+        },
+        created() {
+            this.$root.userInfo = JSON.parse(localStorage.getItem('ms_userinfo'))
         },
         components: {
             Schart
@@ -36,13 +42,35 @@
                 return this.userInfo.power > 10 ? '超级管理员' : '客服';
             }
         },
-        created(){
-        },
         activated(){
+            // this.handleListener();
         },
         deactivated(){
+            // window.removeEventListener('resize', this.renderChart);
+            // bus.$off('collapse', this.handleBus);
         },
         methods: {
+            // changeDate(){
+            //     const now = new Date().getTime();
+            //     this.data.forEach((item, index) => {
+            //         const date = new Date(now - (6 - index) * 86400000);
+            //         item.name = `${date.getFullYear()}/${date.getMonth()+1}/${date.getDate()}`
+            //     })
+            // },
+            // handleListener(){
+            //     bus.$on('collapse', this.handleBus);
+            //     // 调用renderChart方法对图表进行重新渲染
+            //     window.addEventListener('resize', this.renderChart)
+            // },
+            // handleBus(msg){
+            //     setTimeout(() => {
+            //         this.renderChart()
+            //     }, 300);
+            // },
+            // renderChart(){
+            //     this.$refs.bar.renderChart();
+            //     this.$refs.line.renderChart();
+            // }
         }
     }
 
@@ -114,8 +142,8 @@
 }
 
 .user-avator {
-    width: 120px;
-    height: 120px;
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
 }
 
