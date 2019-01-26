@@ -39,6 +39,7 @@
 </template>
 <script>
 import bus from '../common/bus';
+import {update} from '../../api/index'
 export default {
     data() {
         return {
@@ -49,13 +50,27 @@ export default {
             userInfo: JSON.parse(localStorage.getItem('ms_userinfo'))
         }
     },
-    computed: {
-        username() {
-            let username = localStorage.getItem('ms_username');
-            return username ? username : this.name;
+    created() {
+        this.$root.userInfo = JSON.parse(localStorage.getItem('ms_userinfo'));
+        if (this.$root.userInfo.username) {
+            this._updateUserInfo()
         }
+        this.$root.eventHub.$on('updateUserInfo', () => {
+            this._updateUserInfo()
+        })
+    },
+    computed: {
     },
     methods: {
+        async _updateUserInfo() {
+            const loading = this.$loading(this.$root.loadConfig);
+            const ret = await update(this.$root.userInfo.username);
+            loading.close();
+            if (ret.status === 200 && ret.data.code === 200) {
+                localStorage.setItem('ms_userinfo', JSON.stringify(ret.data.data));
+                this.$root.userInfo = ret.data.data;
+            }
+        },
         // 用户名下拉菜单选择事件
         handleCommand(command) {
             if (command == 'loginout') {

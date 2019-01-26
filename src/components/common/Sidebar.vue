@@ -40,13 +40,13 @@
                     index: 'index',
                     title: '系统首页'
                 },{
-                    icon: 'el-icon-lx-recharge',
-                    index: 'goods',
-                    title: '余额充值'
-                },{
                     icon: 'el-icon-lx-rank',
                     index: 'consume',
                     title: '消耗记录'
+                },{
+                    icon: 'el-icon-lx-recharge',
+                    index: 'goods',
+                    title: '余额充值'
                 }]
                 // recharge
             }

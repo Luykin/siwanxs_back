@@ -31,16 +31,10 @@
                 // userInfo: JSON.parse(localStorage.getItem('ms_userinfo'))
             }
         },
-        created() {
-            this.$root.userInfo = JSON.parse(localStorage.getItem('ms_userinfo'))
-        },
         components: {
             Schart
         },
         computed: {
-            role() {
-                return this.userInfo.power > 10 ? '超级管理员' : '客服';
-            }
         },
         activated(){
             // this.handleListener();
