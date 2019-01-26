@@ -49,31 +49,19 @@ export default new Router({
                     // markdown组件
                     path: '/markdown',
                     component: resolve => require(['../components/page/Markdown.vue'], resolve),
-                    meta: { title: 'markdown编辑器' }    
+                    meta: { title: 'markdown编辑器' }
                 },
                 {
                     // 图片上传组件
                     path: '/upload',
                     component: resolve => require(['../components/page/Upload.vue'], resolve),
-                    meta: { title: '文件上传' }   
+                    meta: { title: '文件上传' }
                 },
                 {
                     // vue-schart组件
                     path: '/charts',
                     component: resolve => require(['../components/page/BaseCharts.vue'], resolve),
                     meta: { title: 'schart图表' }
-                },
-                {
-                    // 拖拽列表组件
-                    path: '/drag',
-                    component: resolve => require(['../components/page/DragList.vue'], resolve),
-                    meta: { title: '拖拽列表' }
-                },
-                {
-                    // 权限页面
-                    path: '/permission',
-                    component: resolve => require(['../components/page/Permission.vue'], resolve),
-                    meta: { title: '权限测试', permission: true }
                 },
                 {
                     path: '/404',
@@ -84,21 +72,6 @@ export default new Router({
                     path: '/403',
                     component: resolve => require(['../components/page/403.vue'], resolve),
                     meta: { title: '403' }
-                },
-                {
-                    path: '/order-list',
-                    component: resolve => require(['../components/page/orderList.vue'], resolve),
-                    meta: { title: '订单列表' }
-                },
-                {
-                    path: '/admin-keys',
-                    component: resolve => require(['../components/page/adminkey.vue'], resolve),
-                    meta: { title: '客服管理', permission: true }
-                },
-                {
-                    path: '/in-out',
-                    component: resolve => require(['../components/page/inout.vue'], resolve),
-                    meta: { title: '导入导出', permission: true }
                 },
                 {
                     path: '/updata-password',

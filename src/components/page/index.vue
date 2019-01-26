@@ -10,8 +10,6 @@
                             <div>{{role}}</div>
                         </div>
                     </div>
-                    <div class="user-info-list">元宝易算小程序客服ID: {{userInfo.id}}</div>
-                    <div class="user-info-list">{{userInfo.remarks}}</div>
                 </el-card>
             </el-col>
         </el-row>
@@ -41,34 +39,10 @@
         created(){
         },
         activated(){
-            // this.handleListener();
         },
         deactivated(){
-            // window.removeEventListener('resize', this.renderChart);
-            // bus.$off('collapse', this.handleBus);
         },
         methods: {
-            // changeDate(){
-            //     const now = new Date().getTime();
-            //     this.data.forEach((item, index) => {
-            //         const date = new Date(now - (6 - index) * 86400000);
-            //         item.name = `${date.getFullYear()}/${date.getMonth()+1}/${date.getDate()}`
-            //     })
-            // },
-            // handleListener(){
-            //     bus.$on('collapse', this.handleBus);
-            //     // 调用renderChart方法对图表进行重新渲染
-            //     window.addEventListener('resize', this.renderChart)
-            // },
-            // handleBus(msg){
-            //     setTimeout(() => {
-            //         this.renderChart()
-            //     }, 300);
-            // },
-            // renderChart(){
-            //     this.$refs.bar.renderChart();
-            //     this.$refs.line.renderChart();
-            // }
         }
     }
 

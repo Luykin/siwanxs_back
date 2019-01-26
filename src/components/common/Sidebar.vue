@@ -39,28 +39,16 @@
                     icon: 'el-icon-lx-home',
                     index: 'index',
                     title: '系统首页'
-                },
-                {
-                    icon: 'el-icon-lx-group',
-                    index: 'table',
-                    title: '用户信息'
-                },
-                {
-                    icon: 'el-icon-lx-edit',
-                    index: 'order-list',
-                    title: '订单列表'
-                },
-                {
-                    icon: 'el-icon-lx-lock',
-                    index: 'admin-keys',
-                    title: '客服管理'
-                },
-                {
-                    icon: 'el-icon-lx-file',
-                    index: 'in-out',
-                    title: '导入导出'
-                }
-                ]
+                },{
+                    icon: 'el-icon-lx-recharge',
+                    index: 'goods',
+                    title: '余额充值'
+                },{
+                    icon: 'el-icon-lx-rank',
+                    index: 'order',
+                    title: '消耗记录'
+                }]
+                // recharge
             }
         },
         computed: {
