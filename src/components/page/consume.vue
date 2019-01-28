@@ -87,6 +87,7 @@
                         message: '提交成功',
                         type: 'success'
                     });
+                    this.$root.eventHub.$emit('updateUserInfo');
                     this.page = 1;
                     this._getOrder()
                 }

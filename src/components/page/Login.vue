@@ -1,15 +1,15 @@
 <template>
     <div class="login-wrap">
         <div class="ms-login">
-            <div class="ms-title">抖个赞后台管理系统</div>
+            <div class="ms-title">真人接单后台管理系统</div>
             <el-form ref="ruleForm" label-width="0px" class="ms-content">
                 <el-form-item prop="username">
                     <el-input v-model="phone" placeholder="请输入手机号">
                         <el-button slot="prepend" icon="el-icon-lx-people"></el-button>
                     </el-input>
                 </el-form-item>
-                <div class="flex code-box-warp">
-                    <el-input placeholder="请输入验证码" v-model="code">
+                <div class="flex code-box-warp js">
+                    <el-input placeholder="请输入验证码" v-model="code" class="input-warp">
                         <el-button slot="prepend" icon="el-icon-lx-lock"></el-button>
                     </el-input>
                     <el-button type="primary" class="code-btn" @click="_getCode()">{{time ? `${time}s` : '验证码'}}</el-button>
@@ -182,5 +182,6 @@
 
     .code-box-warp .code-btn {
         margin-left: 10px;
+        flex-grow: 1;
     }
 </style>
