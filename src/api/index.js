@@ -105,7 +105,7 @@ export function add_order(score, username) {
     })
 }
 // https://dev.btc.melonblock.com/fabulous/ks/task_order
-export function task_order(username, page, num) {
+export function task_order(username, kameng_id,page, num) {
     const url = `${PREFIX_URL}/ks/task_order`;
     let data = {
         username,
@@ -114,6 +114,11 @@ export function task_order(username, page, num) {
         uaid: UAID,
         timestamp: getTime(),
     };
+    if (kameng_id) {
+        Object.assign(data, {
+            kameng_id
+        })
+    }
     return axios.post(url, qs.stringify(Object.assign({
         sign: getSign(data)
     }, data))).then(function (res) {
