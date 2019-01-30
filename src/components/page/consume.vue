@@ -11,6 +11,10 @@
                 label="卡盟ID">
             </el-table-column>
             <el-table-column
+                prop="create"
+                label="创建时间">
+            </el-table-column>
+            <el-table-column
                 prop="aa"
                 label="任务目标">
             </el-table-column>
@@ -27,6 +31,10 @@
                 label="下单用户ID">
             </el-table-column>
             <el-table-column
+                prop="successTime"
+                label="完成时间">
+            </el-table-column>
+            <el-table-column
                 prop="CN_status"
                 label="状态">
             </el-table-column>
@@ -41,7 +49,7 @@
 
 <script>
     import {task_order, batch_task} from '../../api/index'
-
+    import {formatTime} from '../../api/util'
     export default {
         name: "consume",
         data() {
@@ -103,7 +111,13 @@
                     return []
                 }
                 list.forEach((item) => {
-                    item.CN_status = item.status === 0 ? '未提交' : item.status === 1 ? '进行中' : '已完成'
+                    try {
+                        item.CN_status = item.status === 0 ? '未提交' : item.status === 1 ? '进行中' : '已完成';
+                        item.create = formatTime(new Date(item.create));
+                        item.successTime = item.update ? formatTime(new Date(item.update)) : '-';
+                    } catch (e) {
+                        console.log(e)
+                    }
                 });
                 return list
             }

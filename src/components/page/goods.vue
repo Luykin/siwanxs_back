@@ -81,7 +81,6 @@
                     if (err) {
                         console.log(err, '二维码错误')
                     } else {
-                        // console.log(url);
                         this.payImg = url;
                         this.dialogTableVisible = true;
                         this.timer = setInterval(() => {
