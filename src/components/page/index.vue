@@ -11,7 +11,7 @@
                             <div>管理员</div>
                         </div>
                     </div>
-                    <div class="user-info-list">抖个赞后台人员ID: {{$root.userInfo.username}}</div>
+                    <div class="user-info-list">后台人员ID: {{$root.userInfo.username}}</div>
                     <div class="user-info-list">余额:{{$root.userInfo.score}}</div>
                 </el-card>
             </el-col>
