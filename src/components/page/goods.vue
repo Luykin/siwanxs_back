@@ -3,6 +3,7 @@
         <el-alert :title="score" type="success" :closable="false">
         </el-alert>
         <div class="input-warp flex js">
+            <span>余额充值:</span>
             <input v-model="money" placeholder="请输入充值金额" @keyup="_rectifyMoney">
             <el-button type="success" round @click="_sure">确定充值</el-button>
         </div>
@@ -14,27 +15,115 @@
                 <el-button type="success" @click="_surePay">确定已完成支付</el-button>
             </span>
         </el-dialog>
+        <div class="model-warp js flex">
+            <el-select v-model="value" placeholder="筛选记录">
+                <el-option
+                    v-for="item in options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+                </el-option>
+            </el-select>
+            <el-button type="primary" @click="_getDetail(true)" round>确定筛选</el-button>
+        </div>
+        <el-table
+            :data="list"
+            style="width: 100%"
+            :row-class-name="tableRowClassName">
+            <el-table-column
+                prop="kameng_id"
+                label="卡盟ID">
+            </el-table-column>
+            <el-table-column
+                prop="title"
+                label="类型">
+            </el-table-column>
+            <el-table-column
+                prop="task_info"
+                label="目标信息">
+            </el-table-column>
+            <el-table-column
+                prop="score"
+                label="金额">
+            </el-table-column>
+            <el-table-column
+                prop="create"
+                label="时间">
+            </el-table-column>
+        </el-table>
+        <el-pagination
+            layout="prev, pager, next"
+            :total="total" :page-size="num" :current-page="page" @current-change="_change">
+        </el-pagination>
     </div>
 </template>
 
 <script>
-    import {add_order, order_poll} from '../../api/index'
+    import {add_order, order_poll, ksDetail} from '../../api/index'
     import QRCode from 'qrcode'
+    import {formatTime} from '../../api/util'
 
     export default {
         name: "goods",
         data() {
             return {
+                options: [{
+                    value: '',
+                    label: '所有记录'
+                },{
+                    value: 1,
+                    label: '消耗记录'
+                }, {
+                    value: 2,
+                    label: '退款记录'
+                }],
+                value: '',
                 score: `当前余额${this.$root.userInfo.score}元`,
                 money: '',
                 payInfo: {},
                 payImg: null,
                 dialogTableVisible: false,
                 timer: null,
-                timeCunt: 0
+                timeCunt: 0,
+                page: 1,
+                num: 10,
+                total: 0,
+                list: []
             }
         },
+        created() {
+            this._getDetail()
+        },
         methods: {
+            _change(value) {
+                this.page = value;
+                this._getDetail()
+            },
+            async _getDetail(must) {
+                if (must) {
+                    this.page = 1
+                }
+                const loading = this.$loading(this.$root.loadConfig);
+                const ret = await ksDetail(this.$root.userInfo.username, this.value, this.page - 1, this.num);
+                loading.close();
+                if (ret.status === 200 && ret.data.code === 200) {
+                    this.list = this._format(ret.data.data.ret);
+                    this.total = ret.data.data.count;
+                }
+            },
+            _format(list) {
+                if (!list || !list.length) {
+                    return []
+                }
+                list.forEach((item) => {
+                    try {
+                        item.create = formatTime(new Date(item.create));
+                    } catch (e) {
+                        console.log(e)
+                    }
+                });
+                return list
+            },
             _close() {
                 this.dialogTableVisible= false;
                 this.payImg = null;
@@ -42,7 +131,18 @@
                 clearInterval(this.timer);
             },
             _surePay() {
-                this._updateUserInfo()
+                this._close();
+                let timer = setTimeout(() => {
+                    this.$root.eventHub.$emit('updateUserInfo');
+                    clearTimeout(timer)
+                }, 1000);
+            },
+            tableRowClassName({row, rowIndex}) {
+                if (row.sr_type === 1) {
+                    return 'success-row';
+                } else {
+                    return 'warning-row';
+                }
             },
             async _sure() {
                 if (this.money <= 0) {
@@ -118,10 +218,17 @@
     }
 
     .input-warp {
+        max-width: none;
         width: 100%;
-        margin-top: 10px;
+        margin: 10px 0;
+        padding: 10px 0;
+        border-bottom: 2px solid rgba(0,0,0,.1);
+        color: #666;
+        font-size: 14px;
     }
-
+    .model-warp{
+        padding: 10px 0;
+    }
     .input-warp input {
         background-color: rgb(255, 255, 255);
         box-sizing: border-box;
@@ -136,6 +243,7 @@
         padding: 0 15px;
         transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1) 0s;
         font-size: 14px;
+        margin: 0 0 0 20px;
     }
 
     input:hover, input:focus {

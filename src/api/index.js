@@ -127,3 +127,27 @@ export function task_order(username, kameng_id,page, num) {
         return Promise.resolve(res.response.status)
     })
 }
+
+// 明细
+export function ksDetail(username, types, page, num) {
+    const url = `${PREFIX_URL}/ks/detail`;
+    let data = {
+        uaid: UAID,
+        username,
+        timestamp: getTime(),
+        page,
+        num
+    };
+    if (types) {
+        Object.assign(data, {
+            types
+        })
+    }
+    return axios.post(url, qs.stringify(Object.assign({
+        sign: getSign(data)
+    }, data))).then(function (res) {
+        return Promise.resolve(res)
+    }).catch(res => {
+        return Promise.resolve(res.response.status)
+    })
+}
