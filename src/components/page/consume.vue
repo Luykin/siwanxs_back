@@ -42,7 +42,14 @@
                 prop="CN_status"
                 label="状态">
             </el-table-column>
-            <!--use_money-->
+            <el-table-column
+                fixed="right"
+                label="操作"
+                width="80">
+                <template slot-scope="scope">
+                    <el-button type="text" size="small" v-if="scope.row.can_cancel" @click="_cancel(scope.row)">取消订单</el-button>
+                </template>
+            </el-table-column>
         </el-table>
         <el-pagination
             layout="prev, pager, next"
@@ -52,7 +59,7 @@
 </template>
 
 <script>
-    import {task_order, batch_task} from '../../api/index'
+    import {task_order, batch_task, cancelTask} from '../../api/index'
     import {formatTime} from '../../api/util'
     export default {
         name: "consume",
@@ -69,6 +76,20 @@
             this._getOrder()
         },
         methods: {
+            async _cancel(item) {
+                const loading = this.$loading(this.$root.loadConfig);
+                const ret = await cancelTask(this.$root.userInfo.username, item.id);
+                loading.close();
+                if (ret.status === 200 && ret.data.code === 200) {
+                    this.$message({
+                        message: '取消成功',
+                        type: 'success'
+                    });
+                    this.$root.eventHub.$emit('updateUserInfo');
+                    this.page = 1;
+                    this._getOrder()
+                }
+            },
             _change(value) {
                 this.page = value;
                 this._getOrder()
@@ -76,8 +97,12 @@
             tableRowClassName({row, rowIndex}) {
                 if (row.status === 2) {
                     return 'success-row';
-                } else if (row.status === 0) {
+                }
+                if (row.status === 0) {
                     return 'warning-row';
+                }
+                if (row.status === 3) {
+                    return 'cancel-row';
                 }
                 return '';
             },
@@ -117,7 +142,7 @@
                 }
                 list.forEach((item) => {
                     try {
-                        item.CN_status = item.status === 0 ? '未提交' : item.status === 1 ? '进行中' : '已完成';
+                        item.CN_status = item.status === 0 ? '未提交' : item.status === 1 ? '进行中' : item.status === 2 ? '已完成' : '已退单';
                         item.create = formatTime(new Date(item.create));
                         item.successTime = item.update ? formatTime(new Date(item.update)) : '-';
                     } catch (e) {

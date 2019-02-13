@@ -151,3 +151,21 @@ export function ksDetail(username, types, page, num) {
         return Promise.resolve(res.response.status)
     })
 }
+
+// 取消订单
+export function cancelTask(username, id) {
+    const url = `${PREFIX_URL}/ks/cancel/task`;
+    let data = {
+        id,
+        uaid: UAID,
+        username,
+        timestamp: getTime()
+    };
+    return axios.post(url, qs.stringify(Object.assign({
+        sign: getSign(data)
+    }, data))).then(function (res) {
+        return Promise.resolve(res)
+    }).catch(res => {
+        return Promise.resolve(res.response.status)
+    })
+}
