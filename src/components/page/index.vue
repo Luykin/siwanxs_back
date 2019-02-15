@@ -2,7 +2,7 @@
     <div>
         <el-row :gutter="20">
             <el-col :span="8">
-                <el-card shadow="hover" style="height:270px;">
+                <el-card shadow="hover" style="height:290px;">
                     <div class="user-info">
                         <img :src="$root.userInfo.avatar" class="user-avator" alt="">
                         <!--{"username":"3814754521","nickname":"17323869299","avatar":"https://cdn.xingkwh.com/DGZavatar.png","score":"0.00","phone":"17323869299"}-->
@@ -16,7 +16,7 @@
                 </el-card>
             </el-col>
             <el-col :span="12">
-                <el-card shadow="hover" style="height:270px;">
+                <el-card shadow="hover" style="height:290px;">
                     <div v-html="appInfo" class="notice"></div>
                 </el-card>
             </el-col>

@@ -47,6 +47,10 @@
                 label="金额">
             </el-table-column>
             <el-table-column
+                prop="balance_score"
+                label="剩余金额">
+            </el-table-column>
+            <el-table-column
                 prop="create"
                 label="时间">
             </el-table-column>
