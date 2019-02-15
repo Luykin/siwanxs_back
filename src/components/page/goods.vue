@@ -35,8 +35,12 @@
                 label="卡盟ID">
             </el-table-column>
             <el-table-column
-                prop="title"
+                prop="sr_type_ch"
                 label="类型">
+            </el-table-column>
+            <el-table-column
+                prop="title"
+                label="服务">
             </el-table-column>
             <el-table-column
                 prop="task_info"
@@ -80,6 +84,9 @@
                 }, {
                     value: 2,
                     label: '退款记录'
+                }, {
+                    value: 3,
+                    label: '充值记录'
                 }],
                 value: '',
                 score: `当前余额${this.$root.userInfo.score}元`,
@@ -122,6 +129,7 @@
                 list.forEach((item) => {
                     try {
                         item.create = formatTime(new Date(item.create));
+                        item.sr_type_ch = item.sr_type === 1 ? '消耗金额' : item.sr_type === 2 ? '退款金额' : '充值金额'
                     } catch (e) {
                         console.log(e)
                     }
