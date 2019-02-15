@@ -210,6 +210,10 @@ a {
     background: #f2effd;
 }
 
+.el-table .paysuc-row {
+    background: #eefddc;
+}
+
 .input-warp {
     max-width: 65%;
     overflow: hidden;

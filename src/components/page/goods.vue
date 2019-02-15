@@ -152,8 +152,12 @@
             tableRowClassName({row, rowIndex}) {
                 if (row.sr_type === 1) {
                     return 'success-row';
-                } else {
+                }
+                if (row.sr_type === 2) {
                     return 'warning-row';
+                }
+                if (row.sr_type === 3) {
+                    return 'paysuc-row'
                 }
             },
             async _sure() {
