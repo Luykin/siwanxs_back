@@ -23,6 +23,10 @@
                 label="任务目标">
             </el-table-column>
             <el-table-column
+                prop="service_type"
+                label="类型">
+            </el-table-column>
+            <el-table-column
                 prop="need_num_0"
                 label="下单数量">
             </el-table-column>
