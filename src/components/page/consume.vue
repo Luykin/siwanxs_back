@@ -51,7 +51,8 @@
                 label="操作"
                 width="80">
                 <template slot-scope="scope">
-                    <el-button type="text" size="small" v-if="scope.row.can_cancel" @click="_cancel(scope.row)">取消订单</el-button>
+                    <el-button type="text" size="small" v-if="scope.row.can_cancel" @click="_cancel(scope.row)">取消订单
+                    </el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -65,6 +66,7 @@
 <script>
     import {task_order, batch_task, cancelTask} from '../../api/index'
     import {formatTime} from '../../api/util'
+
     export default {
         name: "consume",
         data() {
@@ -146,7 +148,7 @@
                 }
                 list.forEach((item) => {
                     try {
-                        item.CN_status = item.status === 0 ? '未提交' : item.status === 1 ? '进行中' : item.status === 2 ? '已完成' : '已退单';
+                        item.CN_status = item.status === 0 ? '未提交' : item.status === 1 ? '进行中' : item.status === 2 ? '已完成' : item.status === 3 ? '已退单' : '准备中';
                         item.create = formatTime(new Date(item.create));
                         item.successTime = item.update ? formatTime(new Date(item.update)) : '-';
                     } catch (e) {
@@ -161,12 +163,13 @@
 
 <style scoped>
     /*.el-button{*/
-        /*margin-bottom: 15px;*/
+    /*margin-bottom: 15px;*/
     /*}*/
-    .btn-all-warp{
+    .btn-all-warp {
         margin-bottom: 15px;
     }
-    .query-input{
+
+    .query-input {
         width: 250px;
         margin-right: 20px;
     }
