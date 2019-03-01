@@ -1,5 +1,5 @@
 const CryptoJS = require('./CryptoJS.js')
-const PRIVATE_KEY = '2018ybyscde2383f6839ee8a99d1d8e6ba8a7e'
+const PRIVATE_KEY = 'MelonBlock2019kameng'
 export const formatTime = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1

@@ -22,7 +22,7 @@ export function ks_login(phone, code) {
 
 // 发生验证码
 export function send_verify(phone) {
-    const url = `${PREFIX_URL}/send_verify`
+    const url = `${PREFIX_URL}/send/verify/code`
     let data = {
         phone,
         uaid: UAID,
